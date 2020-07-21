@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sharing Screen Person</title>
+    <style>
+      #image {
+        display: none;
+        margin: 50px;
+      }
+      #image1 {
+        display: none;
+        margin: 50px;
+      }
+      body {
+        position: absolute;
+        height: 87%;
+        background-size: cover;
+        width: 97%;
+        background-image: url('https://designgrid.com.au/wp-content/uploads/2019/08/isaac-benhesed-onLbXleIkds-unsplash.jpg');
+      }
+      #content {
+        position: relative;
+        text-align: center;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+      #button {
+        position: relative;
+        text-align: center;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+      #picture {
+        margin-left: 370px;
+      }
+      #btn {
+          margin:10px 30px 10px 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <div id="button">
+        <button onclick="find()" id="btn"><h1>Pick a Member</h1></button>
+      </div>
+      <div id="picture">
+        <img
+          src="https://media.giphy.com/media/rY93u9tQbybks/giphy.gif"
+          id="image1"
+          
+        />
+        <img
+          src="https://media.giphy.com/media/Gjnpx6nps0yS4/giphy.gif"
+          id="image"
+          style="border-radius: 50%;"
+        />
+      </div>
+      <div id="member">
+        <h1 id="name"></h1>
+      </div>
+    </div>
+    <script>
+      function find() {
+        document.getElementById("image1").style.display = "none";
+        document.getElementById("name").innerHTML = "";
+        document.getElementById("image").style.display = "block";
+        setTimeout("getRndInteger(0,7)", 2000);
+      }
+      function getRndInteger(min, max) {
+        document.getElementById("image").style.display = "none";
+        document.getElementById("image1").style.display = "block";
+        var team = [
+          "Keerthana",
+          "Raj",
+          "Ankita",
+          "Gayathri",
+          "Muthu",
+          "Mayank",
+          "Abhishek",
+          "Sreejith",
+        ];
+        var selected = Math.floor(Math.random() * (max - min + 1)) + min;
+        document.getElementById("name").innerHTML = team[selected];
+      }
+    </script>
+  </body>
+</html>
