@@ -80,7 +80,6 @@
       function randomNumber(min, max) {
         document.getElementById("image").style.display = "none";
         document.getElementById("image1").style.display = "block";
-        console.log(document.getElementById("teams").value);
         var team;
         switch (parseInt(document.getElementById("teams").value)) {
           case 1:
@@ -99,7 +98,6 @@
             team = ["Priston", "Yash", "Nagaraj", "Harithra", "Suraj", "Sujal", "Sumant","Divya"];
             break;
         }
-        console.log(team);
         var selected = Math.floor(Math.random() * (max - min + 1)) + min;
         document.getElementById("name").innerHTML = team[selected];
       }
