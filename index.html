@@ -5,7 +5,7 @@
     <style>
       #image {
         display: none;
-        margin: 5px 50px 50px 50px;
+        margin: 0px 50px 50px 50px;
       }
       #image1 {
         display: none;
@@ -16,7 +16,7 @@
         height: 87%;
         background-size: cover;
         width: 97%;
-        background-image: url('./wall.jpg');
+        background-image: url("./wall.jpg");
       }
       #content {
         position: relative;
@@ -34,12 +34,24 @@
         margin-left: 370px;
       }
       #btn {
-          margin:10px 30px 10px 30px;
+        margin: 10px 30px 10px 30px;
+        border: none;
       }
     </style>
   </head>
   <body>
     <div id="content">
+      <div>
+        <label for="teams">Choose a team:</label>
+        <select id="teams" autofocus required>
+          <option value="1">
+            Centaur
+          </option>
+          <option value="2">
+            Bennu
+          </option>
+        </select>
+      </div>
       <div id="button">
         <button onclick="find()" id="btn"><h1>Pick a Member</h1></button>
       </div>
@@ -47,7 +59,6 @@
         <img
           src="https://media.giphy.com/media/rY93u9tQbybks/giphy.gif"
           id="image1"
-          
         />
         <img
           src="https://media.giphy.com/media/Gjnpx6nps0yS4/giphy.gif"
@@ -64,21 +75,31 @@
         document.getElementById("image1").style.display = "none";
         document.getElementById("name").innerHTML = "";
         document.getElementById("image").style.display = "block";
-        setTimeout("getRndInteger(0,7)", 2000);
+        setTimeout("randomNumber(0,7)", 2000);
       }
-      function getRndInteger(min, max) {
+      function randomNumber(min, max) {
         document.getElementById("image").style.display = "none";
         document.getElementById("image1").style.display = "block";
-        var team = [
-          "Sri Keerthna",
-          "Raj",
-          "Ankita",
-          "Gayathri",
-          "Mayank",
-          "Muthu",
-          "Abhishek",
-          "Sreejith",
-        ];
+        console.log(document.getElementById("teams").value);
+        var team;
+        switch (parseInt(document.getElementById("teams").value)) {
+          case 1:
+            team = [
+              "Keerthana",
+              "Raj",
+              "Ankita",
+              "Gayathri",
+              "Muthu",
+              "Mayank",
+              "Abhishek",
+              "Sreejith",
+            ];
+            break;
+          case 2:
+            team = ["Priston", "Yash", "Nagaraj", "Harithra", "Suraj", "Sujal", "Sumant"];
+            break;
+        }
+        console.log(team);
         var selected = Math.floor(Math.random() * (max - min + 1)) + min;
         document.getElementById("name").innerHTML = team[selected];
       }
