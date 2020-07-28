@@ -5,15 +5,21 @@
     <style>
       #image {
         display: none;
-        margin: 0px 50px 50px 50px;
       }
       #image1 {
         display: none;
-        margin: 50px;
+      }
+      #name {
+        color: black;
+      }
+      #guest {
+        margin-right: 200px;
+        margin-left: 50px;
       }
       body {
         position: absolute;
         height: 87%;
+        display: flex;
         background-size: cover;
         width: 97%;
         background-image: url("./wall.jpg");
@@ -21,6 +27,8 @@
       #content {
         position: relative;
         text-align: center;
+        padding-top: 20px;
+        width: 500px;
         font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
           "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
       }
@@ -30,20 +38,49 @@
         font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
           "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
       }
-      #picture {
-        margin-left: 370px;
-      }
       #btn {
+        background-color: rgb(0, 0, 0);
+        border-radius: 50px;
+        padding: 15px;
+        color: rgb(182, 182, 182);
         margin: 10px 30px 10px 30px;
+        outline: none;
         border: none;
+      }
+      #clear {
+        border-radius: 50px;
+        padding: 3px;
+        margin: 2px;
+        outline: none;
+        border: none;
+      }
+      #guestName {
+        padding: 15px;
+        border: none;
+        outline: none;
+        border-bottom: 2px solid black;
       }
     </style>
   </head>
   <body>
+    <div id="guest">
+      <h2>Guest SpinWheel</h2>
+      <p>
+        Enter name of the team members
+      </p>
+      <input type="text" id="guestName" placeholder="Member's Name" required />
+      <button onclick="addMember()"><span>&#43;</span></button>
+      <button onclick="clearList()" id="clear">Clear List</button>
+      <div>
+        <ul id="names"></ul>
+      </div>
+      <button onclick="done()" id="done">Done</button>
+    </div>
     <div id="content">
       <div>
         <label for="teams">Choose a team:</label>
-        <select id="teams" autofocus required>
+        <select id="teams" onchange="buttonVisible()">
+          <option disabled selected>-- select --</option>
           <option value="1">
             Centaur
           </option>
@@ -53,7 +90,9 @@
         </select>
       </div>
       <div id="button">
-        <button onclick="find()" id="btn"><h1>Pick a Member</h1></button>
+        <button onclick="find(0,max)" id="btn" disabled>
+          <h1>Pick a Member &#9762;</h1>
+        </button>
       </div>
       <div id="picture">
         <img
@@ -71,11 +110,47 @@
       </div>
     </div>
     <script>
-      function find() {
+      var temp = [];
+      var max = 7;
+      function clearList() {
+        temp = [];
+        document.getElementById("names").innerHTML = "";
+      }
+      function addMember() {
+        var name = document.getElementById("guestName").value;
+        if (name == "") {
+          alert("please enter a name");
+          return false;
+        }
+        document.getElementById("guestName").value = "";
+        temp.push(name);
+        document.getElementById("names").innerHTML = "";
+        for (let i = 0; i < temp.length; i++) {
+          var node = document.createElement("li");
+          node.innerHTML = temp[i];
+          document.getElementById("names").appendChild(node);
+        }
+      }
+      function done() {
+        if(temp.length<1){
+          alert("please enter a name");
+          return false;
+        }
+        document.getElementById("teams").selectedIndex = "0";
+        document.getElementById("btn").removeAttribute("disabled");
+        document.getElementById("btn").style.color = "white";
+        max = temp.length-1;
+      }
+      function buttonVisible() {
+        max = 7;
+        document.getElementById("btn").removeAttribute("disabled");
+        document.getElementById("btn").style.color = "white";
+      }
+      function find(min, max) {
         document.getElementById("image1").style.display = "none";
         document.getElementById("name").innerHTML = "";
         document.getElementById("image").style.display = "block";
-        setTimeout("randomNumber(0,7)", 2000);
+        setTimeout(`randomNumber(${min},${max})`, 2000);
       }
       function randomNumber(min, max) {
         document.getElementById("image").style.display = "none";
@@ -95,10 +170,23 @@
             ];
             break;
           case 2:
-            team = ["Priston", "Yash", "Nagaraj", "Harithra", "Suraj", "Sujal", "Sumant","Divya"];
+            team = [
+              "Priston",
+              "Yash",
+              "Nagaraj",
+              "Harithra",
+              "Suraj",
+              "Divya",
+              "Sujal",
+              "Sumant",
+            ];
             break;
+          default:
+
+            team = temp;
         }
         var selected = Math.floor(Math.random() * (max - min + 1)) + min;
+        console.log(team[selected]);
         document.getElementById("name").innerHTML = team[selected];
       }
     </script>
