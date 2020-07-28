@@ -10,7 +10,8 @@
         display: none;
       }
       #name {
-        color: black;
+        color: white;
+        background-color: rgb(182, 0, 0);
       }
       #guest {
         margin-right: 200px;
@@ -41,11 +42,15 @@
       #btn {
         background-color: rgb(68, 68, 68);
         border-radius: 50px;
-        padding: 15px;
+        padding: 10px;
         color: rgb(182, 182, 182);
         margin: 10px 30px 10px 30px;
         outline: none;
         border: none;
+      }
+      #minion{
+        display: none;
+        transform: scaleX(-1);
       }
       #clear {
         border-radius: 50px;
@@ -96,7 +101,11 @@
       </div>
       <div id="picture">
         <img
-          src="https://media.giphy.com/media/rY93u9tQbybks/giphy.gif"
+          height="250px"
+          ;
+          width="500px"
+          ;
+          src="https://media.giphy.com/media/Gf3fU0qPtI6uk/giphy.gif"
           id="image1"
         />
         <img
@@ -107,7 +116,9 @@
       </div>
       <div id="member">
         <h1 id="name"></h1>
+        <img id="minion" height="100px" src="https://media.giphy.com/media/3ohzdGmM14QTUne9tm/giphy.gif" />
       </div>
+    
     </div>
     <script>
       var temp = [];
@@ -132,14 +143,17 @@
         }
       }
       function done() {
-        if(temp.length<1){
+        if (temp.length < 1) {
           alert("please enter a name");
           return false;
         }
+        document.getElementById("image1").style.display = "none";
+        document.getElementById("minion").style.display = "none";
+        document.getElementById("name").innerHTML = "";
         document.getElementById("teams").selectedIndex = "0";
         document.getElementById("btn").removeAttribute("disabled");
         document.getElementById("btn").style.color = "white";
-        max = temp.length-1;
+        max = temp.length - 1;
       }
       function buttonVisible() {
         max = 7;
@@ -148,6 +162,7 @@
       }
       function find(min, max) {
         document.getElementById("image1").style.display = "none";
+        document.getElementById("minion").style.display = "none";
         document.getElementById("name").innerHTML = "";
         document.getElementById("image").style.display = "block";
         setTimeout(`randomNumber(${min},${max})`, 2000);
@@ -182,12 +197,12 @@
             ];
             break;
           default:
-
             team = temp;
         }
         var selected = Math.floor(Math.random() * (max - min + 1)) + min;
         console.log(team[selected]);
-        document.getElementById("name").innerHTML = team[selected];
+        document.getElementById("name").innerHTML = `${team[selected]} will share the screen`;
+        document.getElementById("minion").style.display = "block";
       }
     </script>
   </body>
