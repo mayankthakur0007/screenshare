@@ -126,6 +126,12 @@
       function clearList() {
         temp = [];
         document.getElementById("names").innerHTML = "";
+        document.getElementById("btn").setAttribute('disabled','true');
+        document.getElementById("image1").style.display = "none";
+        document.getElementById("minion").style.display = "none";
+        document.getElementById("name").innerHTML = "";
+        document.getElementById("btn").style.color = "rgb(182, 182, 182)";
+
       }
       function addMember() {
         var name = document.getElementById("guestName").value;
